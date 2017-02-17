@@ -100,8 +100,10 @@ class ControllerShippingFreteRapido extends Controller {
 
         $db = $this->db;
 
-        // Adiciona a coluna 'manufacturing_deadline' na tabela *_product
-        $db->query("ALTER TABLE " . DB_PREFIX . "product ADD manufacturing_deadline INT(11) DEFAULT '0' NOT NULL AFTER stock_status_id");
+        try {
+            // Adiciona a coluna 'manufacturing_deadline' na tabela *_product
+            $db->query("ALTER TABLE " . DB_PREFIX . "product ADD manufacturing_deadline INT(11) DEFAULT '0' NOT NULL AFTER stock_status_id");
+        } catch (Exception $exception) {}
     }
 
     public function index() {
@@ -125,10 +127,6 @@ class ControllerShippingFreteRapido extends Controller {
         $data['text_enabled'] = $this->language->get('text_enabled');
         $data['text_disabled'] = $this->language->get('text_disabled');
 
-        $data['text_correios_valor_declarado'] = $this->language->get('text_correios_valor_declarado');
-        $data['text_correios_mao_propria'] = $this->language->get('text_correios_mao_propria');
-        $data['text_correios_aviso_recebimento'] = $this->language->get('text_correios_aviso_recebimento');
-
         $data['text_results_nofilter'] = $this->language->get('text_results_nofilter');
         $data['text_results_cheaper'] = $this->language->get('text_results_cheaper');
         $data['text_results_faster'] = $this->language->get('text_results_faster');
@@ -144,21 +142,22 @@ class ControllerShippingFreteRapido extends Controller {
         $data['entry_cost'] = $this->language->get('entry_cost');
         $data['entry_status'] = $this->language->get('entry_status');
         $data['entry_sort_order'] = $this->language->get('entry_sort_order');
-        $data['entry_postcode']= $this->language->get('entry_postcode');
         $data['entry_cnpj']= $this->language->get('entry_cnpj');
-        $data['entry_ie']= $this->language->get('entry_ie');
         $data['entry_results']= $this->language->get('entry_results');
         $data['entry_limit']= $this->language->get('entry_limit');
         $data['entry_post_deadline']= $this->language->get('entry_post_deadline');
         $data['entry_post_cost']= $this->language->get('entry_post_cost');
+        $data['entry_additional_percentage']= $this->language->get('entry_additional_percentage');
         $data['entry_dimension']= $this->language->get('entry_dimension');
         $data['entry_length']= $this->language->get('entry_length');
         $data['entry_width']= $this->language->get('entry_width');
         $data['entry_height']= $this->language->get('entry_height');
 
+        $data['help_cnpj'] = $this->language->get('help_cnpj');
         $data['help_freterapido_token'] = $this->language->get('help_freterapido_token');
         $data['help_post_deadline'] = $this->language->get('help_post_deadline');
         $data['help_post_cost'] = $this->language->get('help_post_cost');
+        $data['help_additional_percentage']= $this->language->get('help_additional_percentage');
         $data['help_dimension'] = $this->language->get('help_dimension');
         $data['help_dimension_unit'] = $this->language->get('help_dimension_unit');
 
@@ -177,12 +176,6 @@ class ControllerShippingFreteRapido extends Controller {
             $data['error_cnpj'] = $this->error['cnpj'];
         } else {
             $data['error_cnpj'] = '';
-        }
-
-        if (isset($this->error['ie'])) {
-            $data['error_ie'] = $this->error['ie'];
-        } else {
-            $data['error_ie'] = '';
         }
 
         if (isset($this->error['postcode'])) {
@@ -233,30 +226,6 @@ class ControllerShippingFreteRapido extends Controller {
             $data['freterapido_cnpj'] = $this->config->get('freterapido_cnpj');
         }
 
-        if (isset($this->request->post['freterapido_ie'])) {
-            $data['freterapido_ie'] = $this->request->post['freterapido_ie'];
-        } else {
-            $data['freterapido_ie'] = $this->config->get('freterapido_ie');
-        }
-
-        if (isset($this->request->post['freterapido_correios_valor_declarado'])) {
-            $data['freterapido_correios_valor_declarado'] = $this->request->post['freterapido_correios_valor_declarado'];
-        } else {
-            $data['freterapido_correios_valor_declarado'] = $this->config->get('freterapido_correios_valor_declarado');
-        }
-
-        if (isset($this->request->post['freterapido_correios_mao_propria'])) {
-            $data['freterapido_correios_mao_propria'] = $this->request->post['freterapido_correios_mao_propria'];
-        } else {
-            $data['freterapido_correios_mao_propria'] = $this->config->get('freterapido_correios_mao_propria');
-        }
-
-        if (isset($this->request->post['freterapido_correios_aviso_recebimento'])) {
-            $data['freterapido_correios_aviso_recebimento'] = $this->request->post['freterapido_correios_aviso_recebimento'];
-        } else {
-            $data['freterapido_correios_aviso_recebimento'] = $this->config->get('freterapido_correios_aviso_recebimento');
-        }
-
         if (isset($this->request->post['freterapido_post_deadline'])) {
             $data['freterapido_post_deadline'] = $this->request->post['freterapido_post_deadline'];
         } else {
@@ -269,6 +238,12 @@ class ControllerShippingFreteRapido extends Controller {
             $data['freterapido_post_cost'] = $this->config->get('freterapido_post_cost');
         }
 
+        if (isset($this->request->post['freterapido_additional_percentage'])) {
+            $data['freterapido_additional_percentage'] = $this->request->post['freterapido_additional_percentage'];
+        } else {
+            $data['freterapido_additional_percentage'] = $this->config->get('freterapido_additional_percentage');
+        }
+
         if (isset($this->request->post['freterapido_results'])) {
             $data['freterapido_results'] = $this->request->post['freterapido_results'];
         } else {
@@ -279,12 +254,6 @@ class ControllerShippingFreteRapido extends Controller {
             $data['freterapido_limit'] = $this->request->post['freterapido_limit'];
         } else {
             $data['freterapido_limit'] = $this->config->get('freterapido_limit');
-        }
-
-        if (isset($this->request->post['freterapido_postcode'])) {
-            $data['freterapido_postcode'] = $this->request->post['freterapido_postcode'];
-        } else {
-            $data['freterapido_postcode'] = $this->config->get('freterapido_postcode');
         }
 
         if (isset($this->request->post['freterapido_msg_prazo'])) {
@@ -342,14 +311,6 @@ class ControllerShippingFreteRapido extends Controller {
 
         if (!$this->request->post['freterapido_cnpj']) {
             $this->error['cnpj'] = $this->language->get('error_cnpj');
-        }
-
-        if (!$this->request->post['freterapido_ie']) {
-            $this->error['ie'] = $this->language->get('error_ie');
-        }
-
-        if (!$this->request->post['freterapido_postcode']) {
-            $this->error['postcode'] = $this->language->get('error_postcode');
         }
 
         if (!$this->request->post['freterapido_token']) {
