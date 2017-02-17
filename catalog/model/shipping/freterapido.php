@@ -1,5 +1,5 @@
 <?php
-class WC_Freterapido_Http {
+class FreterapidoHttp {
     static function do_request($url, $params = array(), $method = 'POST') {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -23,7 +23,7 @@ class WC_Freterapido_Http {
     }
 }
 
-class WC_Freterapido_Shipping {
+class FreterapidoShipping {
     private $config;
     private $sender;
     private $receiver;
@@ -151,7 +151,7 @@ class WC_Freterapido_Shipping {
     }
 
     public function get_quote() {
-        $response = WC_Freterapido_Http::do_request(FR_API_URL . 'embarcador/v1/quote-simulator', $this->format_request());
+        $response = FreterapidoHttp::do_request(FR_API_URL . 'embarcador/v1/quote-simulator', $this->format_request());
 
         if ((int)$response['info']['http_code'] === 401) {
             throw new InvalidArgumentException();
@@ -212,7 +212,7 @@ class ModelShippingFreteRapido extends Model
         );
 
         try {
-            $shipping = new WC_Freterapido_Shipping([
+            $shipping = new FreterapidoShipping([
                 'token' => $this->config->get('freterapido_token'),
                 'codigo_plataforma' => 'opencart2',
                 'custo_adicional' => $this->config->get('freterapido_post_cost') ?: 0,
@@ -414,35 +414,6 @@ class ModelShippingFreteRapido extends Model
                 'cep' => $this->onlyNumbers($address['postcode'])
             )
         );
-    }
-
-    /**
-     * Realiza a requisição na no endereço da API
-     *
-     * @param $url
-     * @param array $params
-     * @return array
-     */
-    function doRequest($url, $params = array()) {
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-
-        $data_string = json_encode($params);
-
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            'Content-Type: application/json',
-            'Content-Length: ' . strlen($data_string)
-        ));
-
-        $result = curl_exec($ch);
-        $info = curl_getinfo($ch);
-
-        curl_close($ch);
-
-        return ['info' => $info, 'result' => json_decode($result, true)];
     }
 
     /**
