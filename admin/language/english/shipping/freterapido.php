@@ -19,6 +19,9 @@ $_['text_results_nofilter'] = 'Sem filtro (todas as  ofertas)';
 $_['text_results_cheaper']  = 'Somente a oferta com meno preço';
 $_['text_results_faster']   = 'Somente a oferta com menor prazo de entrega';
 
+$_['text_shipping_code']    = 'Código do frete contratado no Frete Rápido';
+$_['text_status_awaiting_shipment'] = 'À espera do envio';
+
 // Entry
 $_['entry_status']        			 = 'Habilitar';
 $_['entry_tax_class']  	  			 = 'Grupo de Impostos';

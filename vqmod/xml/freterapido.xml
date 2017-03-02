@@ -190,4 +190,75 @@
             ]]></add>
         </operation>
     </file>
+    <file path="catalog/controller/checkout/confirm.php">
+        <operation>
+            <search><![CDATA[
+              if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/checkout/confirm.tpl')) {
+            ]]></search>
+            <add position="before"><![CDATA[
+              include_once(DIR_APPLICATION . 'controller/shipping/freterapido.php');
+
+              $class = 'Controllershippingfreterapido';
+
+              $controller = new $class($this->registry);
+
+              $method_store_shipping = 'storeShipping';
+
+              if (is_callable(array($controller, $method_store_shipping))) {
+                    call_user_func_array(array($controller, $method_store_shipping), array());
+              }
+            ]]></add>
+        </operation>
+    </file>
+    <file path="admin/controller/sale/order.php">
+        <operation>
+            <search trim="true"><![CDATA[
+              $this->model_sale_order->addOrderHistory($this->request->get['order_id'], $this->request->post);
+            ]]></search>
+            <add position="after"><![CDATA[
+              include_once(DIR_APPLICATION . 'controller/shipping/freterapido.php');
+
+              $class = 'Controllershippingfreterapido';
+
+              $controller = new $class($this->registry);
+
+              $method_store_shipping = 'eventAddOrderHistory';
+
+              if (is_callable(array($controller, $method_store_shipping))) {
+                call_user_func_array(array($controller, $method_store_shipping), array($this->request->get['order_id']));
+              }
+
+              $this->language->load('sale/order');
+            ]]></add>
+        </operation>
+        <operation>
+            <search trim="true"><![CDATA[
+            $this->data['totals'] = $this->model_sale_order->getOrderTotals($this->request->get['order_id']);
+            ]]></search>
+            <add position="before"><![CDATA[
+            $this->load->language('shipping/freterapido');
+
+            $this->data['text_shipping_code'] = $this->language->get('text_shipping_code');
+
+            $this->load->model('sale/order_meta');
+
+            $this->data['fr_quote'] = $this->model_sale_order_meta->getMeta($order_id, 'freterapido_shippings');
+            ]]></add>
+        </operation>
+    </file>
+    <file path="admin/view/template/sale/order_info.tpl">
+        <operation>
+            <search trim="true"><![CDATA[
+              <td><?php echo $shipping_method; ?></td>
+            ]]></search>
+            <add position="after" offset="2"><![CDATA[
+              <?php if ($fr_quote) { ?>
+              <tr>
+                <td><?php echo $text_shipping_code; ?></td>
+                <td><a target="_blank" href="//freterapido.com/?id=<?php echo substr($fr_quote[0], 1); ?>#/rastreamento-carga"><?php echo $fr_quote[0]; ?></a></td>
+              </tr>
+              <?php } ?>
+            ]]></add>
+        </operation>
+    </file>
 </modification>

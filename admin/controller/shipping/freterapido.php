@@ -3,6 +3,10 @@ class ControllerShippingFreteRapido extends Controller {
     private $error = array();
 
     public function install() {
+        $this->load->model('localisation/language');
+        $this->load->model('localisation/order_status');
+        $this->load->language('shipping/freterapido');
+
         // Cria a tabela que relaciona as categorias do OpenCart com as do Frete Rápido
         $this->db->query("
             CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "category_to_fr_category`
@@ -98,12 +102,34 @@ class ControllerShippingFreteRapido extends Controller {
               (64, 'Outros', 999);
         ");
 
-        $db = $this->db;
+        $row = $this->db->query("SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA LIKE '" . DB_DATABASE . "' AND TABLE_NAME LIKE '" . DB_PREFIX . "product' AND COLUMN_NAME = 'manufacturing_deadline' ");
 
-        try {
+        if ($row->num_rows === 0) {
             // Adiciona a coluna 'manufacturing_deadline' na tabela *_product
-            $db->query("ALTER TABLE " . DB_PREFIX . "product ADD manufacturing_deadline INT(11) DEFAULT '0' NOT NULL AFTER stock_status_id");
-        } catch (Exception $exception) {}
+            $this->db->query("ALTER TABLE " . DB_PREFIX . "product ADD manufacturing_deadline INT(11) DEFAULT '0' NOT NULL AFTER stock_status_id");
+        }
+
+        // Cria a tabela para inserir metadata dos fretes
+        $this->db->query("
+            CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "order_meta`
+            (
+              meta_id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+              order_id INT(11) NOT NULL,
+              meta_key VARCHAR(255),
+              meta_value LONGTEXT
+            );
+        ");
+
+        // Insere o status que será usado para a contratação
+        $languages = $this->model_localisation_language->getLanguages();
+        $new_order_status = array();
+        $text_status_awaiting_shipment = $this->language->get('text_status_awaiting_shipment');
+
+        foreach ($languages as $language) {
+            $new_order_status['order_status'][$language['language_id']] = array('name' => $text_status_awaiting_shipment);
+        }
+
+        $this->model_localisation_order_status->addOrderStatus($new_order_status);
     }
 
     public function index() {
@@ -318,5 +344,81 @@ class ControllerShippingFreteRapido extends Controller {
         }
 
         return !$this->error;
+    }
+
+    public function uninstall() {
+        $this->load->model('localisation/language');
+        $this->load->model('localisation/order_status');
+        $this->load->language('shipping/freterapido');
+
+        // Exclui o status usado na contratação
+        $statuses = $this->model_localisation_order_status->getOrderStatuses();
+        $text_status_awaiting_shipment = $this->language->get('text_status_awaiting_shipment');
+
+        $fr_order_status = array_filter($statuses, function ($status) use ($text_status_awaiting_shipment) {
+            return $status['name'] == $text_status_awaiting_shipment;
+        });
+
+        if (count($fr_order_status) > 0) {
+            $this->model_localisation_order_status->deleteOrderStatus(array_pop($fr_order_status)['order_status_id']);
+        }
+    }
+
+    public function eventAddOrderHistory($order_id) {
+        foreach (['config', 'http', 'hire_shipping', 'helpers'] as $file_name) {
+            include_once(DIR_APPLICATION . 'model/freterapido/' . $file_name . '.php');
+        }
+
+        $this->load->model('sale/order');
+        $this->load->model('sale/order_meta');
+        $this->load->model('setting/setting');
+        $this->load->language('shipping/freterapido');
+
+        $cnpj = fix_zip_code($this->config->get('freterapido_cnpj'));
+        $token = $this->config->get('freterapido_token');
+        $order_histories = $this->model_sale_order->getOrderHistories($order_id);
+        $last_history = array_pop($order_histories);
+
+        if ($last_history['status'] != $this->language->get('text_status_awaiting_shipment')) {
+            return;
+        }
+
+        $quote = $this->model_sale_order_meta->getMeta($order_id, 'freterapido_quotes');
+
+        // Verifica se é uma oferta própria
+        if ($quote === false) {
+            return;
+        }
+
+        $order = $this->model_sale_order->getOrder($order_id);
+
+        if (empty($order['cpf'])) {
+            return;
+        }
+
+        $cpf = fix_zip_code($order['cpf']);
+
+        try {
+            $hire_shipping = new FreterapidoHireShipping($token);
+            $response = $hire_shipping
+                ->add_sender(array('cnpj' => $cnpj))
+                ->add_receiver(array(
+                    'cnpj_cpf' => $cpf,
+                    'nome' => "{$order['firstname']} {$order['lastname']}",
+                    'email' => $order['email'],
+                    'telefone' => $order['telephone'],
+                    'endereco' => array(
+                        'cep' => fix_zip_code($order['shipping_postcode']),
+                        'rua' => $order['shipping_address_1'],
+                        'bairro' => $order['shipping_address_2'],
+                        'numero' => '',
+                    )
+                ))
+                ->hire_quote($quote['token'], $quote['oferta']);
+
+            $this->model_sale_order_meta->addMeta($order_id, 'freterapido_shippings', array_values($response));
+        } catch (UnexpectedValueException $e) {
+            $this->log->write($e->getMessage());
+        } catch (Exception $e) {}
     }
 }
