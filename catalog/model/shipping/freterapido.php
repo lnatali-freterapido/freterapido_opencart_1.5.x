@@ -40,7 +40,7 @@ class ModelShippingFreteRapido extends Model
         try {
             $shipping = new FreterapidoShipping([
                 'token' => $this->config->get('freterapido_token'),
-                'codigo_plataforma' => 'opencart2',
+                'codigo_plataforma' => '58b972e6e',
                 'custo_adicional' => $this->config->get('freterapido_post_cost') ?: 0,
                 'prazo_adicional' => $this->config->get('freterapido_post_deadline') ?: 0,
                 'percentual_adicional' => $this->config->get('freterapido_additional_percentage') / 100,
