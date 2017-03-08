@@ -86,12 +86,17 @@ Para total usabilidade do módulo **Frete Rápido**, é necessário realizar alg
 ![Configuração de categorias ](http://freterapido.com/dev/imgs/opencart_doc/1.5/category_edit.gif "Configuração de categorias")
 
 > **Obs:** Nem todas as categorias da sua loja podem estar na relação de categorias do Frete Rápido, mas é possível relacioná-las de forma ampla.
-> 
+>
 > **Exemplo 1**: Moda feminina --> Vestuário
-> 
+>
 > **Exemplo 2**: CDs --> CD / DVD / Blu-Ray
-> 
+>
 > **Exemplo 3**: Violões --> Instrumento Musical
+
+####4. Campo de CPF no cadastro de Usuário
+
+- Para que você consiga contratar os fretes através da sua loja, é necessário adicionar um campo no formulário de cadastro dos usuários para armazenar o **CPF**.
+Nós desenvolvemos uma extensão que faz isso para você automaticamente. Para usá-la, basta acessar a documentação dela [neste link][7].
 
 --------
 
@@ -146,3 +151,4 @@ Encontrou algum bug ou tem sugestões de melhorias no código? Sencacional! Não
   [4]: https://github.com/freterapido/freterapido_opencart_1.5.x/archive/master.zip
   [5]: https://github.com/freterapido/freterapido_magento/blob/master/LICENSE
   [6]: https://www.opencart.com/index.php?route=marketplace/extension/info&extension_id=25506&filter_category_id=5&filter_license=free
+  [7]: https://github.com/freterapido/opencart_1.5.x_cpf_checkout
