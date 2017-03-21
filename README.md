@@ -43,7 +43,7 @@ Links úteis:
 
 ![Configurando o módulo do Frete Rápido](http://freterapido.com/dev/imgs/opencart_doc/1.5/extension_edit.jpg "Editando o módulo")
 
-![Configurando o módulo do Frete Rápido](http://freterapido.com/dev/imgs/opencart_doc/1.5/extension_configuration.png "Configurações do módulo")
+![Configurando o módulo do Frete Rápido](http://freterapido.com/dev/imgs/opencart_doc/1.5/extension_configuration_2.png "Configurações do módulo")
 
 - **Habilitar:** Habilita ou desabilita o módulo conforme sua necessidade.
 - **CNPJ da loja:** CNPJ da sua empresa conforme cadastrada no Frete Rápido.
