@@ -86,39 +86,6 @@
           </tr>
           <tr>
             <td>
-              <label for="input-post-deadline"><?php echo $entry_post_deadline; ?>:</label>
-            </td>
-            <td>
-              <input type="number" min="0" name="freterapido_post_deadline" value="<?php echo $freterapido_post_deadline; ?>" placeholder="<?php echo $entry_post_deadline; ?>" id="input-post-deadline" />
-              <span class="help">
-                <?php echo $help_post_deadline; ?>
-              </span>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <label for="input-post-cost"><?php echo $entry_post_cost; ?>:</label>
-            </td>
-            <td>
-              <input type="number" min="0" step="0.1" name="freterapido_post_cost" value="<?php echo $freterapido_post_cost; ?>" placeholder="<?php echo $entry_post_cost; ?>" id="input-post-cost" class="form-control" />
-              <span class="help">
-                <?php echo $help_post_cost; ?>
-              </span>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <label for="input-additional-percentage"><?php echo $entry_additional_percentage; ?>:</label>
-            </td>
-            <td>
-              <input type="number" min="0" step="0.1" name="freterapido_additional_percentage" value="<?php echo $freterapido_additional_percentage; ?>" placeholder="<?php echo $entry_additional_percentage; ?>" id="input-additional-percentage" class="form-control" />
-              <span class="help">
-                <?php echo $help_additional_percentage; ?>
-              </span>
-            </td>
-          </tr>
-          <tr>
-            <td>
               <label for="lenght"><?php echo $entry_dimension; ?></label>
               <span class="help">
                 <?php echo $help_dimension; ?>
