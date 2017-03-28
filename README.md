@@ -2,9 +2,9 @@
 ![Frete Rápido - Sistema Inteligente de Gestão Logística](https://freterapido.com/imgs/frete_rapido.png)
 ===
 
-###**Módulo para plataforma OpenCart**
+### **Módulo para plataforma OpenCart**
 
-Versão do módulo: 1.0
+Versão do módulo: 1.0.1
 
 Compatibilidade com OpenCart: **1.5.x**
 
@@ -16,7 +16,7 @@ Links úteis:
 
 ----------
 
-###Instalação
+### Instalação
 
 >**ATENÇÃO!** Recomendamos que seja feito backup da sua loja antes de realizar qualquer instalação. A instalação desse módulo é de inteira responsabilidade do lojista.
 
@@ -35,15 +35,15 @@ Links úteis:
 
 ----------
 
-###Configurações
+### Configurações
 
-####1. Configurações do módulo:
+#### 1. Configurações do módulo:
 
 - Agora, configure o módulo em **Extensions > Shipping**, procure o plugin "**Frete Rápido**" na listagem "**Shipping**" e clique no botão **Editar**.
 
-![Configurando o módulo do Frete Rápido](http://freterapido.com/dev/imgs/opencart_doc/1.5/extension_edit.jpg "Editando o módulo")
+![Configurando o módulo do Frete Rápido](https://freterapido.com/dev/imgs/opencart_doc/1.5/extension_edit.jpg "Editando o módulo")
 
-![Configurando o módulo do Frete Rápido](http://freterapido.com/dev/imgs/opencart_doc/1.5/extension_configuration_2.png "Configurações do módulo")
+![Configurando o módulo do Frete Rápido](https://freterapido.com/dev/imgs/opencart_doc/1.5/extension_configurations.png "Configurações do módulo")
 
 - **Habilitar:** Habilita ou desabilita o módulo conforme sua necessidade.
 - **CNPJ da loja:** CNPJ da sua empresa conforme cadastrada no Frete Rápido.
@@ -55,7 +55,7 @@ Links úteis:
 
 > **Obs:** É importante informar todos os campos corretamente.
 
-####2. Medidas e Peso
+#### 2. Medidas e Peso
 
 Para total usabilidade do módulo **Frete Rápido**, é necessário realizar algumas configurações na sua loja.
 
@@ -76,28 +76,28 @@ Para total usabilidade do módulo **Frete Rápido**, é necessário realizar alg
 
 ![Configurando dados dos produtos](http://freterapido.com/dev/imgs/opencart_doc/1.5/product_edit.jpg "Configuração dados de produtos")
 
-####3. Categorias
+#### 3. Categorias
 
 - É necessário relacionar cada categoria da sua loja com as categorias do Frete Rápido em: **Catalog > Categories > Edit** (por produto) **>** aba **"Data"**.
 
 ![Configuração de categorias ](http://freterapido.com/dev/imgs/opencart_doc/1.5/category_edit.gif "Configuração de categorias")
 
 > **Obs:** Nem todas as categorias da sua loja podem estar na relação de categorias do Frete Rápido, mas é possível relacioná-las de forma ampla.
->
+> 
 > **Exemplo 1**: Moda feminina --> Vestuário
->
+> 
 > **Exemplo 2**: CDs --> CD / DVD / Blu-Ray
->
+> 
 > **Exemplo 3**: Violões --> Instrumento Musical
 
-####4. Campo de CPF no cadastro de Usuário
+#### 4. Campo de CPF no cadastro de Usuário
 
 - Para que você consiga contratar os fretes através da sua loja, é necessário adicionar um campo no formulário de cadastro dos usuários para armazenar o **CPF**.
 Nós desenvolvemos uma extensão que faz isso para você automaticamente. Para usá-la, basta acessar a documentação dela [neste link][7].
 
 --------
 
-###Observações gerais:
+### Observações gerais:
 1. Para obter cotações dos Correios é necessário configurar o seu contrato com os Correios no [Painel administrativo do Frete Rápido][2] > Empresa > Integração.
 2. Esse módulo atende cotações apenas para destinatários Pessoa Física.
 
@@ -126,7 +126,7 @@ Para contratar um frente você precisa:
 
 --------
 
-###Contribuições
+### Contribuições
 Encontrou algum bug ou tem sugestões de melhorias no código? Sencacional! Não se acanhe, nos envie um pull request com a sua alteração e ajude este projeto a ficar ainda melhor.
 
 1. Faça um "Fork"
@@ -142,7 +142,7 @@ Encontrou algum bug ou tem sugestões de melhorias no código? Sencacional! Não
 
 
 
-  [1]: https://www.opencart.com/index.php?route=marketplace/extension/info&extension_id=30147&filter_search=frete%20rapido&filter_category_id=4 "OpenCart Extension Store"
+  [1]: https://www.opencart.com/index.php?route=marketplace/extension/info&extension_id=30147&filter_search=frete%20r%C3%A1pido "OpenCart Extension Store"
   [2]: https://freterapido.com/painel/?origin=github_opencart_1.5.x "Painel do Frete Rápido"
   [3]: mailto:suporte@freterapido.com "E-mail para a galera super gente fina :)"
   [4]: https://github.com/freterapido/freterapido_opencart_1.5.x/archive/master.zip
