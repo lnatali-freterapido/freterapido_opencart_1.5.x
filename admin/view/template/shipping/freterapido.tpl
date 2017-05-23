@@ -86,6 +86,30 @@
           </tr>
           <tr>
             <td>
+              <label for="input-free-shipping"><?php echo $entry_free_shipping; ?>:</label>
+            </td>
+            <td>
+              <select name="freterapido_free_shipping" id="input-free-shipping" class="form-control">
+                <?php if ($freterapido_free_shipping) { ?>
+                <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
+                <option value="0"><?php echo $text_disabled; ?></option>
+                <?php } else { ?>
+                <option value="1"><?php echo $text_enabled; ?></option>
+                <option value="0" selected="selected"><?php echo $text_disabled; ?></option>
+                <?php } ?>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label for="input-min-value-free-shipping"><?php echo $entry_min_value_free_shipping; ?>:</label>
+            </td>
+            <td>
+              <input type="text" name="freterapido_min_value_free_shipping" value="<?php echo $freterapido_min_value_free_shipping; ?>" placeholder="<?php echo $entry_min_value_free_shipping; ?>" id="input-min-value-free-shipping"/>
+            </td>
+          </tr>
+          <tr>
+            <td>
               <label for="lenght"><?php echo $entry_dimension; ?></label>
               <span class="help">
                 <?php echo $help_dimension; ?>
