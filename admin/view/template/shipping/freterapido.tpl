@@ -102,6 +102,14 @@
           </tr>
           <tr>
             <td>
+              <label for="input-min-value-free-shipping"><?php echo $entry_min_value_free_shipping; ?>:</label>
+            </td>
+            <td>
+              <input type="text" name="freterapido_min_value_free_shipping" value="<?php echo $freterapido_min_value_free_shipping; ?>" placeholder="<?php echo $entry_min_value_free_shipping; ?>" id="input-min-value-free-shipping"/>
+            </td>
+          </tr>
+          <tr>
+            <td>
               <label for="lenght"><?php echo $entry_dimension; ?></label>
               <span class="help">
                 <?php echo $help_dimension; ?>
