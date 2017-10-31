@@ -19,7 +19,14 @@ Links úteis:
 - [Painel administrativo][2]
 - [suporte@freterapido.com][3]
 
-----------
+-------------
+
+### IMPORTANTE
+A Frete Rápido não mantem e/ou oferece suporte para a integração com o **OpenCart**, apenas disponibilizamos um módulo de integração padrão que atente a maioria dos e-commerces que utilizam esta plataforma.
+
+Para qualquer modificação no módulo baseada no modelo de negócio do seu e-commerce, nós disponibilizamos aqui o código fonte do módulo integrado a [API do Frete Rápido][9] e aqui [neste link][8] você encontra a documentação de integrações e modificações do **OpenCart**.
+
+--------------
 
 ### Instalação
 
@@ -156,3 +163,5 @@ Encontrou algum bug ou tem sugestões de melhorias no código? Sencacional! Não
   [5]: https://github.com/freterapido/freterapido_magento/blob/master/LICENSE
   [6]: https://www.opencart.com/index.php?route=marketplace/extension/info&extension_id=25506&filter_category_id=5&filter_license=free
   [7]: https://github.com/freterapido/opencart_1.5.x_cpf_checkout
+  [8]: http://docs.opencart.com/developer/module/
+  [9]: https://www.freterapido.com/dev/
