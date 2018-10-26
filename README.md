@@ -69,7 +69,7 @@ A Frete Rápido não se responsabiliza por eventualidades advindas deste módulo
 - **Exibir Frete Grátis no frete mais barato:** Apresenta para o cliente da loja o frete mais barato como **Frete Grátis**.
 - **Valor Mínimo Frete Grátis:**  Define o valor mínimo para ativar a regra de **Frete grátis**. Para valor **indefinido**, informe **0**.
 - **Dimensões padrões (C x L x A):** Permite informar dimensões padrões de encomendas, geralmente usado quando se tem um único tipo de encomenda.
-- **Token de integração:** Token de integração da sua empresa disponível no [Painel administrativo do Frete Rápido][2] > Empresa > Integração.
+- **Token de integração:** Token de integração da sua empresa disponível no [Painel administrativo do Frete Rápido][2] > Configurações.
 - **Ordem:** Ordenação do plugin na sua loja.
 
 > **Atenção:** É importante informar corretamente todos os campos para o perfeito funcionamento do módulo.
@@ -116,21 +116,6 @@ Nós desenvolvemos uma extensão que faz isso para você automaticamente. Para u
 
 --------
 
-### Observações gerais:
-1. Para obter cotações dos Correios é necessário configurar o seu contrato com os Correios no [Painel administrativo do Frete Rápido][2] > Empresa > Integração.
-2. Esse módulo atende cotações apenas para destinatários Pessoa Física.
-
-----------
-
-### Cálculo do frete na página do produto
-
-Para cálculo do frete na página do produto, você precisa utilizar o plugin [Simular Frete no Produto][6], disponível na loja oficial da plataforma OpenCart.
-Após instalar o plugin, sua página do produto deverá apresentar o campo para calcular o frete com base no CEP.
-
-![Cálculo na página do produto](docs/img/cotacao_pagina_produto.gif "Página do produto")
-
---------
-
 ### Contratação do frete
 
 Para contratar um frente e gerar uma solicitação de coleta, você deve seguir os passos:
@@ -142,6 +127,15 @@ Para contratar um frente e gerar uma solicitação de coleta, você deve seguir 
 ![Cálculo na página do produto](docs/img/contratacao.gif "Página do produto")
 
 > **Obs**: Na aba **Shipping details** você encontra o código de rastreio do frete no campo **código do frete contratado no Frete Rápido**. Ao clicar sobre o código, você será direcionado à página de rastreio desse frete.
+
+--------
+
+### Cálculo do frete na página do produto
+
+Para cálculo do frete na página do produto, você precisa utilizar o plugin [Simular Frete no Produto][6], disponível na loja oficial da plataforma OpenCart.
+Após instalar o plugin, sua página do produto deverá apresentar o campo para calcular o frete com base no CEP.
+
+![Cálculo na página do produto](docs/img/cotacao_pagina_produto.gif "Página do produto")
 
 --------
 
