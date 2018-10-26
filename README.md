@@ -42,6 +42,8 @@ A Frete Rápido não se responsabiliza por eventualidades advindas deste módulo
 
 ![Instalação do módulo](docs/img/extension_install.gif "Procedimentos de instalação")
 
+### Habilitando
+
 - Você precisa ir em **Extensions > Shipping**, procurar o plugin "**Frete Rápido**" na listagem "**Shipping**" e clicar no botão **Install**.
 
 ![Habilitando o módulo](docs/img/extension_install_2.jpg "Habilitando o módulo")
@@ -70,28 +72,28 @@ A Frete Rápido não se responsabiliza por eventualidades advindas deste módulo
 - **Token de integração:** Token de integração da sua empresa disponível no [Painel administrativo do Frete Rápido][2] > Empresa > Integração.
 - **Ordem:** Ordenação do plugin na sua loja.
 
-> **Obs:** É importante informar todos os campos corretamente.
+> **Atenção:** É importante informar corretamente todos os campos para o perfeito funcionamento do módulo.
 
 #### 2. Medidas e Peso
 
 Para total usabilidade do módulo **Frete Rápido**, é necessário realizar algumas configurações na sua loja.
 
-- É necessário informar alguns dados de cada produto em: **Catalog > Products > Edit** (por produto) **>** aba **"Data"**.
+- É importante informar alguns dados de cada produto em: **Catalog > Products > Edit** (por produto) **>** aba **"Data"**.
 
+    - **SKU:** Não é obrigatório, mas cajo esteja informado será possível aplicar regras de frete por SKUs, por exemplo.
+
+    - **Prazo de fabricação:** Permite informar um prazo de fabricação do produto, caso tenha. Este prazo será acrescido ao prazo de entrega.
+
+    - **Dimensões (C x L x A):** Informe as dimensões do produto (Comprimento, Largura e Altura).
+
+    - **Peso:** Informe o peso do produto, considerando embalado pronto para envio.
+    
 ![Editando dados dos produtos](docs/img/product_edit.gif "Editando dados de produtos")
 
->**1. SKU:** Sugerimos definir um SKU para cada produto da sua loja. Não é obrigatório, mas se o SKU estiver definido, será possível realizar uma análise junto ao Frete Rápido.
-
->**2. Prazo de fabricação:** Informe um prazo de fabricação do produto, caso necessário. Esse prazo adicional será acrescido ao prazo de entrega.
-
->**3. Dimensões (C x L x A):** Informe os valores de medidas do produto (Comprimento, Largura e Altura).
-
->**4. Peso:** Informe o peso do produto.
+![Configurando dados dos produtos](docs/img/product_edit.jpg "Configuração dados de produtos")
 
 > **Atenção:** Considerar as dimensões e peso do produto com a embalagem pronta para envio/postagem.
-> É obrigatório ter o peso configurado em cada produto para que seja possível cotar o frete de forma eficiente. As dimensões podem ficar em branco e neste caso, serão utilizadas as medidas padrões informadas na configuração do plugin, mas é recomendado que cada produto tenha suas configurações próprias de peso e dimensões.
-
-![Configurando dados dos produtos](docs/img/product_edit.jpg "Configuração dados de produtos")
+> É importante ter o peso configurado em cada produto para que seja possível cotar o frete de forma eficiente. Se as dimensões não forem informadas, serão utilizadas as medidas padrões informadas na configuração do plugin. Mas é recomendado que cada produto tenha suas próprias dimensões e peso informados.
 
 #### 3. Categorias
 
@@ -131,20 +133,22 @@ Após instalar o plugin, sua página do produto deverá apresentar o campo para 
 
 ### Contratação do frete
 
-Para contratar um frente você precisa:
+Para contratar um frente e gerar uma solicitação de coleta, você deve seguir os passos:
 
 - Acessar Sales > Orders > [Uma ordem selecionada] > Aba **History**.
 - Trocar o campo **Order Status** de **À espera do envio**.
 - Clicar no botão **Add History**.
 
-> **Obs**: Na aba **Shipping details** você encontra o código de rastreio do frete no campo **código do frete contratado no Frete Rápido**. Ao clicar sobre o código, você será direcionado à página de rastreio desse frete.
-
 ![Cálculo na página do produto](docs/img/contratacao.gif "Página do produto")
+
+> **Obs**: Na aba **Shipping details** você encontra o código de rastreio do frete no campo **código do frete contratado no Frete Rápido**. Ao clicar sobre o código, você será direcionado à página de rastreio desse frete.
 
 --------
 
-### Observações gerais:
+### Considerações finais:
+
 1. Para obter cotações dos Correios é necessário configurar o seu contrato com os Correios no [Painel administrativo do Frete Rápido][2] > Empresa > Integração.
+
 2. Esse módulo atende solicitações de coleta para destinatários Pessoa Física. Para atender Pessoas Jurídicas, o módulo pode ser adaptado por você de acordo com a [API da Frete Rápido][9].
 
 --------
@@ -162,7 +166,6 @@ Encontrou algum bug ou tem sugestões de melhorias no código? Sencacional! Não
 
 ### Licença
 [MIT][5]
-
 
 
   [1]: https://www.opencart.com/index.php?route=marketplace/extension/info&extension_id=30147&filter_search=frete%20r%C3%A1pido "OpenCart Extension Store"
