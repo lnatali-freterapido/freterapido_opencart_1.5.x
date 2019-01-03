@@ -9,7 +9,7 @@ class FreterapidoShipping {
 
     private $default_dimensions = [
         'height' => 0.5,
-        'width' => 0.5,
+        'width'  => 0.5,
         'length' => 0.5,
         'weight' => 1
     ];
@@ -17,8 +17,8 @@ class FreterapidoShipping {
     public function __construct(array $config) {
         $this->config = array_merge([
             'tipo_cobranca' => 1,
-            'tipo_frete' => 1,
-            'ecommerce' => true,
+            'tipo_frete'    => 1,
+            'ecommerce'     => true,
         ], $config);
     }
 
@@ -88,7 +88,7 @@ class FreterapidoShipping {
      */
     public function set_filter($filter) {
         if ($filter) {
-            $this->config['filtro'] = $filter;
+            $this->config['filtro'] = (int) $filter;
         }
 
         return $this;
@@ -100,7 +100,7 @@ class FreterapidoShipping {
      */
     public function set_limit($limit) {
         if ($limit) {
-            $this->config['limite'] = $limit;
+            $this->config['limite'] = (int) $limit;
         }
 
         return $this;
@@ -116,12 +116,12 @@ class FreterapidoShipping {
         return array_merge(
             $request,
             array(
-                'remetente' => $this->sender,
-                'destinatario' => $this->receiver,
-                'volumes' => $this->volumes,
+                'remetente'     => $this->sender,
+                'destinatario'  => $this->receiver,
+                'volumes'       => $this->volumes,
                 'tipo_cobranca' => 1,
-                'tipo_frete' => 1,
-                'ecommerce' => true,
+                'tipo_frete'    => 1,
+                'ecommerce'     => true,
             ),
             $this->config
         );
