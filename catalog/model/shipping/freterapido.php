@@ -30,11 +30,11 @@ class ModelShippingFreteRapido extends Model
         $this->setup($address);
 
         $method_data = array(
-            'code' => 'freterapido',
-            'title' => $this->language->get('text_title'),
-            'quote' => array(),
+            'code'       => 'freterapido',
+            'title'      => $this->language->get('text_title'),
+            'quote'      => array(),
             'sort_order' => $this->config->get('freterapido_sort_order'),
-            'error' => false
+            'error'      => false
         );
 
         try {
@@ -48,7 +48,7 @@ class ModelShippingFreteRapido extends Model
                 ->add_sender($this->sender)
                 ->set_default_dimensions([
                     'length' => $this->config->get('freterapido_length'),
-                    'width' => $this->config->get('freterapido_width'),
+                    'width'  => $this->config->get('freterapido_width'),
                     'height' => $this->config->get('freterapido_height'),
                 ])
                 ->add_volumes($this->volumes)
@@ -157,12 +157,12 @@ class ModelShippingFreteRapido extends Model
         }
 
         return array(
-            'code' => 'freterapido.' . $key,
-            'title' => $title,
-            'cost' => $carrier['custo_frete'],
+            'code'         => 'freterapido.' . $key,
+            'title'        => $title,
+            'cost'         => $carrier['custo_frete'],
             'tax_class_id' => 0,
-            'text' => $text,
-            'meta_data' => array('oferta' => $carrier['oferta'])
+            'text'         => $text,
+            'meta_data'    => array('oferta' => $carrier['oferta'])
         );
     }
 
@@ -186,13 +186,13 @@ class ModelShippingFreteRapido extends Model
             $weight = $this->convertWeightToKG($weight_class_id, $product['weight']);
 
             $volume = array(
-                'quantidade' => $product['quantity'],
-                'altura' => $height,
-                'largura' => $width,
+                'quantidade'  => $product['quantity'],
+                'altura'      => $height,
+                'largura'     => $width,
                 'comprimento' => $length,
-                'peso' => $weight,
-                'valor' => $product['total'],
-                'sku' => $product_from_db['sku']
+                'peso'        => $weight,
+                'valor'       => $product['total'],
+                'sku'         => $product_from_db['sku']
             );
 
             $findFRCategory = function ($category) {
