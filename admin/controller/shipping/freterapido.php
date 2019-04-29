@@ -120,7 +120,7 @@ class ControllerShippingFreteRapido extends Controller
             (80, 'Máquina / Equipamentos', 80),
             (81, 'Rações / Alimento para Animal', 81),
             (82, 'Artigos para Camping)', 82),
-            (74, 'Outros', 999);
+            (83, 'Outros', 999);
         ");
 
         $row = $this->db->query("SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA LIKE '" . DB_DATABASE . "' AND TABLE_NAME LIKE '" . DB_PREFIX . "product' AND COLUMN_NAME = 'manufacturing_deadline' ");
